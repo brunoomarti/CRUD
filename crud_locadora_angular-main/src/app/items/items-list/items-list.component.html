@@ -1,0 +1,64 @@
+<div>
+  <div class="page">
+    <div class="space">
+      <mat-card-content class="padding-off fit-height">
+        <mat-toolbar class="table-between">
+            <div>
+              Itens Cadastrados
+            </div>
+            <div class="example-button-container">
+              <div class="example-button-container">
+                <button mat-raised-button (click)="onAdd()" color="primary">Adicionar Item</button>
+              </div>
+            </div>
+        </mat-toolbar>
+
+        <mat-table [dataSource]="items" style="background-color: #1a1a1a">
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Numero de série</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+          </ng-container>
+
+          <!-- Titulo Column -->
+          <ng-container matColumnDef="titulo">
+            <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.titulo.nome}} </mat-cell>
+          </ng-container>
+
+          <!-- Data de Aquisição Column -->
+          <ng-container matColumnDef="dataAquisicao">
+            <mat-header-cell *matHeaderCellDef>Data de Aquisição</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dataAquisicao}} </mat-cell>
+          </ng-container>
+
+          <!-- Tipo Column -->
+          <ng-container matColumnDef="tipo">
+            <mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.tipo}} </mat-cell>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef style="margin-top: auto">
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="actions">
+              <button mat-icon-button  color="accent" aria-label="Editar item" (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="warn" aria-label="Remover item" (click)="onDelete(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div class="fecha-tabela"></div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

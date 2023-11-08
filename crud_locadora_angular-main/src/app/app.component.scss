@@ -1,0 +1,43 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+mat-accordion {
+  margin: 0 0 20px 0;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  height: 54px;
+}
+
+.mat-expansion-panel {
+  background: var(--primary);
+}
+
+.mat-accordion .mat-expansion-panel:first-of-type {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.mat-expansion-panel-header-title {
+  font-size: 24px;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+
+$my-primary: mat-palette($mat-deep-orange, A700);
+$my-accent: mat-palette($mat-deep-orange, 300);
+$my-warn: mat-palette($mat-red);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn,
+ )
+));
+
+@include angular-material-theme($my-theme);

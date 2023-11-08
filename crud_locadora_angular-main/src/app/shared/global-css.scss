@@ -1,0 +1,205 @@
+@use '@angular/material' as mat;
+@import '@angular/material/theming';
+
+.button-area {
+  width: 100%;
+  margin: 10px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-group {
+  display: flex;
+}
+
+.button {
+  background-color: var(--cinza-um);
+  padding: 8px 20px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 300ms ease;
+  margin-right: 10px;
+}
+
+.button-2 {
+  border: 2px var(--cinza-um) solid;
+  padding: 8px 20px;
+  color: var(--cinza-um);
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 300ms ease;
+}
+
+.button:hover {
+  transition: 300ms ease;
+  letter-spacing: 2px;
+}
+
+.button-2:hover {
+  transition: 300ms ease;
+  letter-spacing: 2px;
+}
+
+.menu-div {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.menu-logo {
+  width: 50px;
+  padding: 0 15px 0 0;
+}
+
+h1 {
+  color: white;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  color: rgb(202, 202, 202);
+  font-size: 20px;
+  font-weight: 300;
+  padding: 0;
+  margin: 0;
+}
+
+.botao-secundario {
+  background-color: var(--cinza-dois);
+  color: white;
+}
+
+.fix-card {
+  border-radius: 10px;
+}
+
+.page{
+  width: 100%;
+}
+
+.fix-title {
+  padding: 1px 0 10px 0;
+  margin: 0;
+  height: fit-content;
+  background-color: var(--cinza-dois);
+  color: white;
+}
+
+.form-fix {
+  padding: 30px 50px 0 50px;
+}
+
+.fill {
+  width: 100%;
+}
+
+.input-area {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.button-distance {
+  gap: 10px;
+}
+
+mat-card-actions {
+  padding: 30px 66px 30px 0;
+}
+
+mat-card {
+  background-color: var(--cinza-um);
+}
+
+mat-toolbar {
+  background-color: var(--cinza-dois);
+  color: white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+mat-table {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+mat-cell, mat-header-cell {
+  text-align: left;
+}
+
+.fecha-tabela {
+  width: 100%;
+  height: 10px;
+  background-color: var(--cinza-dois);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.space {
+  padding: 50px 140px 50px 140px;
+}
+
+.loading-spinner {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+mat-header-cell.actions {
+  justify-content: flex-end;
+}
+
+.color-fix {
+  --mat-option-selected-state-label-text-color: $my-primary;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+$my-primary: mat-palette($mat-deep-orange, A700);
+$my-accent: mat-palette($mat-gray, 300);
+$my-warn: mat-palette($mat-red);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn,
+ )
+));
+
+@include angular-material-theme($my-theme);

@@ -1,0 +1,52 @@
+<div>
+  <div class="page">
+    <div class="space">
+      <mat-card-content class="padding-off fit-height">
+        <mat-toolbar class="table-between">
+            <div>
+              Diretores Cadastrados
+            </div>
+            <div class="example-button-container">
+              <div class="example-button-container">
+                <button mat-raised-button (click)="onAdd()" color="primary">Adicionar Diretor</button>
+              </div>
+            </div>
+        </mat-toolbar>
+
+        <mat-table [dataSource]="diretores" style="background-color: #1a1a1a">
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef style="margin-top: auto">
+            </mat-header-cell>
+
+
+            <mat-cell *matCellDef="let element" class="actions">
+              <button mat-icon-button  color="accent" aria-label="Editar diretor" (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="warn" aria-label="Remover diretor" (click)="onDelete(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div class="fecha-tabela"></div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>

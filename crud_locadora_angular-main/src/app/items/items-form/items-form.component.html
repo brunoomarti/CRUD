@@ -1,0 +1,46 @@
+<div class="page">
+  <div class="space">
+    <mat-card class="fix-card">
+
+      <mat-toolbar>Adicionar Item</mat-toolbar>
+
+      <mat-card-content>
+        <form [formGroup]="form" class="form-fix">
+
+          <div class="input-area">
+            <div class="fill">
+              <h2>Titulo</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <mat-select placeholder="Selecione o titulo" formControlName="titulo" class="color-fix">
+                  <mat-option *ngFor="let titulo of listaDeTitulos" [value]="titulo">{{titulo.nome}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="fill">
+              <h2>Data de aquisição</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput type="date" placeholder="Selecione a data" formControlName="dataAquisicao" required>
+              </mat-form-field>
+            </div>
+            <div class="fill">
+              <h2>Tipo</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <mat-select placeholder="Selecione o tipo" formControlName="tipo">
+                  <mat-option value="fita">Fita</mat-option>
+                  <mat-option value="dvd">DVD</mat-option>
+                  <mat-option value="blueray">BlueRay</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions class="button-distance example-button-container">
+        <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+        <button mat-raised-button class="botao-secundario" (click)="onBack()">Cancelar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

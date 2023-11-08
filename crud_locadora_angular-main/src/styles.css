@@ -1,0 +1,29 @@
+:root {
+  --background-color: rgb(10, 10, 10);
+  --cinza-um: #1E1E1E;
+  --cinza-dois: #3b3b3b;
+  --primary: #DD2C00;
+}
+
+.custom-snackbar {
+  --mdc-snackbar-container-color: var(--primary);
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+html {
+  --mat-option-selected-state-label-text-color: white;
+  --mdc-filled-text-field-caret-color: white;
+  --mdc-filled-text-field-focus-active-indicator-color: white;
+  --mdc-filled-text-field-focus-label-text-color: white;
+  --mdc-outlined-text-field-caret-color: white;
+  --mdc-outlined-text-field-focus-outline-color: white;
+  --mdc-outlined-text-field-focus-label-text-color: white;
+  --mat-select-focused-arrow-color: white;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {
+  background: #ffffff;
+}
+
+html, body { height: 100%; background-color: var(--background-color); }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

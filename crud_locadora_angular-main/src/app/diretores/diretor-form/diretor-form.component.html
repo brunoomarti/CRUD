@@ -1,0 +1,23 @@
+<div class="page">
+  <div class="space">
+    <mat-card class="fix-card">
+
+      <mat-toolbar>Adicionar Diretor</mat-toolbar>
+
+      <mat-card-content>
+        <form [formGroup]="form" class="form-fix">
+          <mat-form-field hintLabel="Limite de 100 caracteres" class="fill" style="color: white;">
+            <mat-label>Nome do diretor</mat-label>
+            <input matInput #input maxlength="100" placeholder="Digite aqui" formControlName="nome" required>
+            <mat-hint align="end">{{input.value.length}}/100</mat-hint>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions class="button-distance example-button-container">
+        <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+        <button mat-raised-button class="botao-secundario" (click)="onBack()">Cancelar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

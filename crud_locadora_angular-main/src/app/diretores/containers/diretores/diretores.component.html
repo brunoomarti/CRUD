@@ -1,0 +1,14 @@
+<app-diretores-list
+  *ngIf="diretores$ | async as diretores; else carregando"
+  [diretores]="diretores"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (remove)="onRemove($event)"
+>
+</app-diretores-list>
+
+<ng-template #carregando>
+  <div class="carregando-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,14 @@
+<app-atores-list
+  *ngIf="atores$ | async as atores; else carregando"
+  [atores]="atores"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (remove)="onRemove($event)"
+>
+</app-atores-list>
+
+<ng-template #carregando>
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

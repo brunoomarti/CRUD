@@ -1,0 +1,14 @@
+<app-classes-list
+  *ngIf="classes$ | async as classes; else carregando"
+  [classes]="classes"
+  (add)="onAdd()"
+  (edit)="onEdit($event)"
+  (remove)="onRemove($event)"
+>
+</app-classes-list>
+
+<ng-template #carregando>
+  <div class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,92 @@
+<div>
+  <div class="page">
+    <div class="space">
+      <mat-card-content class="padding-off fit-height">
+        <mat-toolbar class="table-between">
+            <div>
+              Titulos Cadastrados
+            </div>
+            <div class="example-button-container">
+              <div class="example-button-container">
+                <button mat-raised-button (click)="onAdd()" color="primary">Adicionar Titulo</button>
+              </div>
+            </div>
+        </mat-toolbar>
+
+        <mat-table [dataSource]="titulos" style="background-color: #1a1a1a">
+
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nome}} </mat-cell>
+          </ng-container>
+
+          <!-- Atores Column -->
+          <ng-container matColumnDef="ator">
+            <mat-header-cell *matHeaderCellDef>Ator(es)</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <ng-container *ngFor="let ator of element.atores; let last = last">
+                {{ ator.nome }}{{!last ? ', ' : ''}}
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Diretor Column -->
+          <ng-container matColumnDef="diretor">
+            <mat-header-cell *matHeaderCellDef>Diretor</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.diretor.nome}} </mat-cell>
+          </ng-container>
+
+          <!-- Ano Column -->
+          <ng-container matColumnDef="ano">
+            <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.ano}} </mat-cell>
+          </ng-container>
+
+          <!-- Sinopse Column -->
+          <ng-container matColumnDef="sinopse">
+            <mat-header-cell *matHeaderCellDef>Sinopse</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.sinopse}} </mat-cell>
+          </ng-container>
+
+          <!-- Categoria Column -->
+          <ng-container matColumnDef="categoria">
+            <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.categoria}} </mat-cell>
+          </ng-container>
+
+          <!-- Classe Column -->
+          <ng-container matColumnDef="classe">
+            <mat-header-cell *matHeaderCellDef>Classe</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.classe.nome}} </mat-cell>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef style="margin-top: auto">
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="actions">
+              <button mat-icon-button  color="accent" aria-label="Editar titulo" (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button mat-icon-button color="warn" aria-label="Remover titulo" (click)="onDelete(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div class="fecha-tabela"></div>
+      </mat-card-content>
+    </div>
+  </div>
+</div>
