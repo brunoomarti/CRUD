@@ -1,4 +1,3 @@
-import { ItemsModule } from './items/items.module';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
@@ -10,6 +9,7 @@ const routes: Routes = [
   { path: 'diretor', loadChildren: () => import('./diretores/diretores.module').then(m => m.DiretoresModule) },
   { path: 'titulo', loadChildren: () => import('./titulos/titulos.module').then(m => m.TitulosModule) },
   { path: 'item', loadChildren: () => import('./items/items.module').then(m => m.ItemsModule) },
+  { path: 'cliente', loadChildren: () => import('./cliente/cliente.module').then(m => m.ClienteModule) },
 ];
 
 @NgModule({

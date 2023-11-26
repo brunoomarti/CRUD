@@ -5,14 +5,12 @@ import {Location} from "@angular/common";
 @Component({
   selector: 'app-dlg-generica',
   templateUrl: './dlg-generica.html',
-  styleUrls: ['./dlg-generica.css']
+  styleUrls: ['./dlg-generica.css', '../../../shared/global-css.scss']
 })
 export class DlgGenericaComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string, private location: Location) {
-
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { mensagemHtml: string }, private location: Location) {}
 
   voltar() {
-      this.location.back();
+    this.location.back();
   }
 }

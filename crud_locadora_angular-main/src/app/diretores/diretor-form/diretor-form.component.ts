@@ -14,6 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DiretorFormComponent implements OnInit {
   form: FormGroup;
+  modoEdicao: boolean = false;
+  mensagemSnackbarAcerto: string = 'Diretor cadastrado com sucesso.';
+  mensagemSnackbarErro: string = 'Erro ao cadastrar diretor.';
 
   constructor(private formBuilder: FormBuilder,
               private servico: DiretoresService,
@@ -33,6 +36,12 @@ export class DiretorFormComponent implements OnInit {
   ngOnInit() {
     const diretor: Diretor = this.route.snapshot.data['diretor'];
     this.form.setValue({_id: diretor._id,  nome: diretor.nome});
+
+    this.route.params.subscribe(params => {
+      this.modoEdicao = !!params['id'];
+      this.mensagemSnackbarAcerto = this.modoEdicao ? 'Diretor editado com sucesso.' : 'Diretor cadastrado com sucesso.';
+      this.mensagemSnackbarErro = this.modoEdicao ? 'Erro ao editar diretor.' : 'Erro ao cadastrar diretor.';
+    });
   }
 
   onSubmit() {
@@ -40,11 +49,11 @@ export class DiretorFormComponent implements OnInit {
   }
 
   onFailed() {
-    this.snackBar.open('Erro ao cadastrar diretor.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarErro, '', { duration: 5000, panelClass: ['errorSnackbar'] });
   }
 
   onSucess() {
-    this.snackBar.open('Diretor cadastrado com sucesso.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarAcerto, '', { duration: 5000, panelClass: ['successSnackbar'] });
     this.location.back();
   }
 

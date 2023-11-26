@@ -1,12 +1,17 @@
 package com.brunoicaro.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import com.brunoicaro.DTO.ClasseRequestDTO;
+import com.brunoicaro.DTO.ClasseResponseDTO;
 import com.brunoicaro.model.Classe;
-import com.brunoicaro.repository.ClasseRepository;
+import com.brunoicaro.service.ClasseService;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.util.List;
 
@@ -15,48 +20,49 @@ import java.util.List;
 @RequestMapping("/api/classe")
 public class ClasseController {
 
-    private final ClasseRepository classeRepository;
+    private final ClasseService classeService;
 
-    @GetMapping
-    public List<Classe> list() {
-        return classeRepository.findAll();
+    public ClasseController(ClasseService classeService){
+        this.classeService = classeService;
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping
+    public @ResponseBody List<ClasseResponseDTO> getAll(){
+        return classeService.getAll();
+    }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Classe create(@RequestBody Classe classe) {
-        return classeRepository.save(classe);
+    public Classe saveClasse(@RequestBody @Valid ClasseRequestDTO data){
+        return classeService.saveClasse(data);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Classe> findbyId(@PathVariable Long id) {
-        return classeRepository.findById(id)
-                .map(registro -> ResponseEntity.ok().body(registro))
-                .orElse(ResponseEntity.notFound().build());
-
+    public ClasseResponseDTO findById(@PathVariable @NotNull @Positive Long id) {
+        Classe classe = classeService.findById(id);
+        if (classe != null) {
+            return new ClasseResponseDTO(
+                classe.getId(),
+                classe.getNome(),
+                classe.getPrazoDias(),
+                classe.getValor()
+            );
+        } else {
+            return null;
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Classe> update(@PathVariable Long id, @RequestBody Classe classe){
-        return classeRepository.findById(id)
-                .map(registro -> {
-                    registro.setNome(classe.getNome());
-                    registro.setPrazoDias(classe.getPrazoDias());
-                    registro.setValor(classe.getValor());
-                    Classe updated = classeRepository.save(registro);
-                    return ResponseEntity.ok().body(updated);
-                        })
-                .orElse(ResponseEntity.notFound().build());
-
+    public Classe update(@PathVariable @NotNull @Positive Long id, @RequestBody Classe classe){
+        return classeService.update(id, classe);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        return classeRepository.findById(id)
-                .map(registro -> {
-                    classeRepository.deleteById(id);
-                    return ResponseEntity.noContent().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable @NotNull @Positive Long id){
+        classeService.delete(id);
     }
+
 }

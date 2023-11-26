@@ -1,24 +1,42 @@
-<mat-accordion>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        MENU
-      </mat-panel-title>
-      <mat-panel-description>
-        Locadora Rewind (Bruno Martinelli e Icaro Barbosa)
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div class="button-area">
-      <div class="button-group">
-        <a routerLink="/ator" class="button">ATOR</a>
-        <a routerLink="/classe" class="button">CLASSE</a>
-        <a routerLink="/diretor" class="button">DIRETOR</a>
-        <a routerLink="/titulo" class="button">TITULO</a>
-        <a routerLink="/item" class="button">ITEM</a>
-        <a routerLink="/menu" class="button-2">VOLTAR</a>
+<mat-expansion-panel hideToggle (opened)="togglePanel()" (closed)="togglePanel()">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div class="arrow-icon" [class.expanded]="isPanelExpanded">
+        <mat-icon>keyboard_arrow_down</mat-icon>
       </div>
+      MENU
+    </mat-panel-title>
+    <mat-panel-description>
+      Locadora Rewind (Bruno Martinelli e Icaro Barbosa)
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="button-area">
+    <div class="button-group">
+      <mat-menu #categoriasMenu="matMenu">
+        <button mat-menu-item routerLink="/ator">ATOR</button>
+        <button mat-menu-item routerLink="/classe">CLASSE</button>
+        <button mat-menu-item routerLink="/diretor">DIRETOR</button>
+        <button mat-menu-item routerLink="/titulo">TITULO</button>
+        <button mat-menu-item routerLink="/item">ITEM</button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="categoriasMenu" class="button" color="white">
+        CATEGORIAS
+      </button>
+
+      <mat-menu #controleMenu="matMenu">
+        <button mat-menu-item routerLink="/">LOCAÇÃO E DEVOLUÇÃO</button>
+        <button mat-menu-item routerLink="/cliente">CLIENTE</button>
+        <button mat-menu-item routerLink="/">FUNCIONÁRIO</button>
+      </mat-menu>
+
+      <button mat-button [matMenuTriggerFor]="controleMenu" class="button" color="white">
+        CONTROLE
+      </button>
+
+      <button routerLink="/menu" class="button-2">VOLTAR</button>
     </div>
-  </mat-expansion-panel>
-</mat-accordion>
+  </div>
+</mat-expansion-panel>
 
 <router-outlet></router-outlet>

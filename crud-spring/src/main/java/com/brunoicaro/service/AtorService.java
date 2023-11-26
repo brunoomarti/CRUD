@@ -1,14 +1,17 @@
 package com.brunoicaro.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.brunoicaro.DTO.AtorRequestDTO;
 import com.brunoicaro.DTO.AtorResponseDTO;
+import com.brunoicaro.exception.ExclusaoComDependenciasException;
 import com.brunoicaro.exception.RecordNotFoundException;
 import com.brunoicaro.model.Ator;
+import com.brunoicaro.model.Titulo;
 import com.brunoicaro.repository.AtorRepository;
 
 import jakarta.validation.Valid;
@@ -46,10 +49,30 @@ public class AtorService {
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public void delete(@PathVariable @NotNull @Positive Long id){
-        repository.delete(repository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException(id)));
+    public void delete(@PathVariable @NotNull @Positive Long id) {
+        List<String> titulosDependentes = obterTitulosComDependencias(id);
+        
+        if (!titulosDependentes.isEmpty()) {
+            throw new ExclusaoComDependenciasException(
+                "Este registro possui dependências em outras entidades.<br/><br/>" +
+                "Títulos dependentes: <br/>" +
+                String.join("<br/>", titulosDependentes)
+            );
+        } else {
+            repository.delete(repository.findById(id)
+                    .orElseThrow(() -> new RecordNotFoundException(id)));
+        }
+    }
 
+    private List<String> obterTitulosComDependencias(Long id) {
+        Ator ator = repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id));
+
+        List<String> titulosComDependencias = ator.getTitulos().stream()
+                .map(Titulo::getNome)
+                .collect(Collectors.toList());
+
+        return titulosComDependencias;
     }
 
 }

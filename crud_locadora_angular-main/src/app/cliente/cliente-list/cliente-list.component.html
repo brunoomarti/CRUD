@@ -1,0 +1,166 @@
+<div>
+  <div class="page">
+    <div class="space">
+      <mat-card-content class="padding-off fit-height">
+        <mat-toolbar class="table-between">
+          <div>Sócios Cadastrados</div>
+          <div class="example-button-container">
+            <div class="example-button-container">
+              <button mat-raised-button (click)="onAdd()" color="primary">
+                Adicionar Sócio
+              </button>
+            </div>
+          </div>
+        </mat-toolbar>
+
+        <mat-table [dataSource]="cliente" style="background-color: #1a1a1a">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element._id }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.nome }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="telefone">
+            <mat-header-cell *matHeaderCellDef>Telefone</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.telefone }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sexo">
+            <mat-header-cell *matHeaderCellDef>Sexo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.sexo }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="cpf">
+            <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.cpf }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dataNasc">
+            <mat-header-cell *matHeaderCellDef>Data de Nascimento</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.dataNasc }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="endereco">
+            <mat-header-cell *matHeaderCellDef>Endereço</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.rua }}, {{ element.numero }} - {{ element.bairro }} - {{ element.cidade }} - {{ element.estado }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dependente">
+            <mat-header-cell *matHeaderCellDef style="margin-top: auto">
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="actions">
+              <button>
+
+              </button>
+
+              <button>
+
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef style="margin-top: auto">
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="actions">
+              <button
+                mat-icon-button
+                color="accent"
+                aria-label="Editar cliente"
+                (click)="onEdit(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="warn"
+                aria-label="Remover cliente"
+                (click)="onDelete(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+        <div class="fecha-tabela"></div>
+      </mat-card-content>
+
+      <br><br>
+
+      <mat-card-content class="padding-off fit-height">
+        <mat-toolbar class="table-between">
+          <div>Dependentes Cadastrados</div>
+          <div class="example-button-container">
+            <div class="example-button-container">
+              <button mat-raised-button (click)="onAdd()" color="primary">
+                Adicionar Dependente
+              </button>
+            </div>
+          </div>
+        </mat-toolbar>
+
+        <mat-table [dataSource]="dependente" style="background-color: #1a1a1a">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element._id }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.nome }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sexo">
+            <mat-header-cell *matHeaderCellDef>Sexo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.sexo }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dataNasc">
+            <mat-header-cell *matHeaderCellDef>Data de Nascimento</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.dataNasc }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef style="margin-top: auto">
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" class="actions">
+              <button
+                mat-icon-button
+                color="accent"
+                aria-label="Editar cliente"
+                (click)="onEditDep(element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="warn"
+                aria-label="Remover cliente"
+                (click)="onDeleteDep(element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumnsDep"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumnsDep"></mat-row>
+        </mat-table>
+        <div class="fecha-tabela"></div>
+      </mat-card-content>
+
+    </div>
+  </div>
+</div>

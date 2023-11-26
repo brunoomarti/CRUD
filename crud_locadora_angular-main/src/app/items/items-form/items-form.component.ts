@@ -1,6 +1,6 @@
 import { TitulosService } from './../../titulos/services/titulos.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ItemsService } from '../servicos/items.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,9 @@ export class ItemsFormComponent implements OnInit {
 
   form: FormGroup;
   listaDeTitulos: any[] = [];
+  modoEdicao: boolean = false;
+  mensagemSnackbarAcerto: string = 'Item cadastrado com sucesso.';
+  mensagemSnackbarErro: string = 'Erro ao cadastrar item.';
 
   constructor(private formBuilder: FormBuilder,
               private servico: ItemsService,
@@ -50,6 +53,12 @@ export class ItemsFormComponent implements OnInit {
                       });
 
     this.titulosService.listar().subscribe(titulos => this.listaDeTitulos = titulos);
+
+    this.route.params.subscribe(params => {
+      this.modoEdicao = !!params['id'];
+      this.mensagemSnackbarAcerto = this.modoEdicao ? 'Item editado com sucesso.' : 'Item cadastrado com sucesso.';
+      this.mensagemSnackbarErro = this.modoEdicao ? 'Erro ao editar item.' : 'Erro ao cadastrar item.';
+    });
   }
 
   onSubmit() {
@@ -57,11 +66,11 @@ export class ItemsFormComponent implements OnInit {
   }
 
   onFailed() {
-    this.snackBar.open('Erro ao cadastrar item.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarErro, '', { duration: 5000, panelClass: ['errorSnackbar'] });
   }
 
   onSucess() {
-    this.snackBar.open('Item cadastrado com sucesso.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarAcerto, '', { duration: 5000, panelClass: ['successSnackbar'] });
     this.location.back();
   }
 

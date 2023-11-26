@@ -1,7 +1,6 @@
 package com.brunoicaro.DTO;
 
 import java.util.List;
-import java.util.Set;
 
 import com.brunoicaro.model.Ator;
 import com.brunoicaro.model.Classe;

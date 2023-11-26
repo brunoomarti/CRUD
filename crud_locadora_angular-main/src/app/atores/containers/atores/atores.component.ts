@@ -19,7 +19,6 @@ export class AtoresComponent implements OnInit {
 
   atores$: Observable<Ator[]>;
 
-
   constructor(
     private atoresservices: AtoresService,
     public dialog: MatDialog,
@@ -62,7 +61,7 @@ export class AtoresComponent implements OnInit {
           () => {
             this.snackBar.open('Ator removido com sucesso!', '', {
               duration: 5000,
-              panelClass: ['custom-snackbar'],
+              panelClass: ['successSnackbar'],
             });
 
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -70,13 +69,23 @@ export class AtoresComponent implements OnInit {
             });
           },
           (error) => {
-            this.snackBar.open('Erro ao remover ator!', '', {
-              duration: 5000,
-              panelClass: ['custom-snackbar', 'error'],
-            });
+            if (error.status === 409) {
+              this.mostrarMensagemConfirmacao(error.error.message);
+            } else {
+              this.snackBar.open('Erro ao remover ator!', '', {
+                duration: 5000,
+                panelClass: ['errorSnackbar', 'error'],
+              });
+            }
           }
         );
       }
+    });
+  }
+
+  mostrarMensagemConfirmacao(mensagem: string) {
+    this.dialog.open(DlgGenericaComponent, {
+      data: { mensagemHtml: mensagem }
     });
   }
 }

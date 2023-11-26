@@ -61,7 +61,7 @@ export class ItemsComponent implements OnInit {
           () => {
             this.snackBar.open('Item removido com sucesso!', '', {
               duration: 5000,
-              panelClass: ['custom-snackbar'],
+              panelClass: ['successSnackbar'],
             });
 
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -71,7 +71,7 @@ export class ItemsComponent implements OnInit {
           () => {
             this.snackBar.open('Erro ao remover item!', '', {
               duration: 5000,
-              panelClass: ['custom-snackbar', 'error'],
+              panelClass: ['errorSnackbar', 'error'],
             });
           }
         );

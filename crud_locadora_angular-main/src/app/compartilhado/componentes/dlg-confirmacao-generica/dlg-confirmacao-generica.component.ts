@@ -4,7 +4,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 @Component({
   selector: 'app-dlg-confirmacao-generica',
   templateUrl: './dlg-confirmacao-generica.component.html',
-  styleUrls: ['./dlg-confirmacao-generica.component.css']
+  styleUrls: ['./dlg-confirmacao-generica.component.css', '../../../shared/global-css.scss']
 })
 export class DlgConfirmacaoGenericaComponent {
   constructor(public dialogRef: MatDialogRef<DlgConfirmacaoGenericaComponent>) {}

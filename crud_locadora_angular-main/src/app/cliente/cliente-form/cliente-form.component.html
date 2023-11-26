@@ -1,0 +1,133 @@
+<div class="page">
+  <div class="space">
+    <mat-card class="fix-card">
+
+      <mat-toolbar>{{ modoEdicao ? 'Editar Cliente' : 'Adicionar Cliente' }}</mat-toolbar>
+
+      <mat-card-content>
+        <form [formGroup]="form" class="form-fix">
+
+          <div class="input-area">
+            <div class="fill">
+              <h2>Nome</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input placeholder="Digite aqui" formControlName="nome" required>
+              </mat-form-field>
+            </div>
+
+            <div class="fill">
+              <h2>CPF</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input placeholder="Digite aqui" formControlName="cpf" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="input-area">
+            <div class="fill">
+              <h2>Data de nascimento</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input type="date" placeholder="Digite aqui" formControlName="dataNasc" required>
+              </mat-form-field>
+            </div>
+
+            <div class="fill">
+              <h2>Telefone</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput type="tel" maxlength="11" placeholder="(XX) XXXXX-XXXX" formControlName="telefone" pattern="\(\d{2}\)\d{5}-\d{4}" required>
+              </mat-form-field>
+            </div>
+
+            <div class="fill">
+              <h2>Sexo</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <mat-select placeholder="Selecione o sexo" formControlName="sexo">
+                  <mat-option value="m">Masculino</mat-option>
+                  <mat-option value="f">Feminino</mat-option>
+                  <mat-option value="ne">Não especificado</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <br>
+
+          <h2 style="font-weight: 500;">ENDEREÇO</h2>
+
+          <div class="input-area">
+            <div class="fill">
+              <h2>Rua</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input placeholder="Digite aqui" formControlName="rua" required>
+              </mat-form-field>
+            </div>
+
+            <div style="width: 20%;">
+              <h2>Número</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input type="number" step="1" min="1" placeholder="Digite aqui" formControlName="rua" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="input-area">
+            <div class="fill">
+              <h2>Bairro</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input placeholder="Digite aqui" formControlName="bairro" required>
+              </mat-form-field>
+            </div>
+
+            <div class="fill">
+              <h2>Cidade</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <input matInput #input placeholder="Digite aqui" formControlName="cidade" required>
+              </mat-form-field>
+            </div>
+
+            <div class="fill">
+              <h2>Estado</h2>
+              <mat-form-field class="fill" style="color: white;">
+                <mat-select placeholder="Selecione o estado" formControlName="estado">
+                  <mat-option value="Acre">Acre</mat-option>
+                  <mat-option value="Alagoas">Alagoas</mat-option>
+                  <mat-option value="Amapá">Amapá</mat-option>
+                  <mat-option value="Amazonas">Amazonas</mat-option>
+                  <mat-option value="Bahia">Bahia</mat-option>
+                  <mat-option value="Ceará">Ceará</mat-option>
+                  <mat-option value="Distrito Federal">Distrito Federal</mat-option>
+                  <mat-option value="Espírito Santo">Espírito Santo</mat-option>
+                  <mat-option value="Goiania">Goiania</mat-option>
+                  <mat-option value="Maranhão">Maranhão</mat-option>
+                  <mat-option value="Mato Grosso">Mato Grosso</mat-option>
+                  <mat-option value="Mato Grosso do Sul">Mato Grosso do Sul</mat-option>
+                  <mat-option value="Minas Gerais">Minas Gerais</mat-option>
+                  <mat-option value="Pará">Pará</mat-option>
+                  <mat-option value="Paraíba">Paraíba</mat-option>
+                  <mat-option value="Paraná">Paraná</mat-option>
+                  <mat-option value="Pernambuco">Pernambuco</mat-option>
+                  <mat-option value="Piauí">Piauí</mat-option>
+                  <mat-option value="Rio de Janeiro">Rio de Janeiro</mat-option>
+                  <mat-option value="Rio Grande do Norte">Rio Grande do Norte</mat-option>
+                  <mat-option value="Rio Grande do Sul">Rio Grande do Sul</mat-option>
+                  <mat-option value="Rondônia">Rondônia</mat-option>
+                  <mat-option value="Roraima">Roraima</mat-option>
+                  <mat-option value="Santa Catarina">Santa Catarina</mat-option>
+                  <mat-option value="São Paulo">São Paulo</mat-option>
+                  <mat-option value="Sergipe">Sergipe</mat-option>
+                  <mat-option value="Tocantins">Tocantins</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions class="button-distance example-button-container">
+        <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+        <button mat-raised-button class="botao-secundario" (click)="onBack()">Cancelar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

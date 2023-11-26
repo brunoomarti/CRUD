@@ -61,7 +61,7 @@ export class DiretoresComponent implements OnInit {
           () => {
             this.snackBar.open('Diretor removido com sucesso!', '', {
               duration: 5000,
-              panelClass: ['custom-snackbar'],
+              panelClass: ['successSnackbar'],
             });
 
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -69,13 +69,23 @@ export class DiretoresComponent implements OnInit {
             });
           },
           (error) => {
-            this.snackBar.open('Erro ao remover diretor!', '', {
-              duration: 5000,
-              panelClass: ['custom-snackbar', 'error'],
-            });
+            if (error.status === 409) {
+              this.mostrarMensagemConfirmacao(error.error.message);
+            } else {
+              this.snackBar.open('Erro ao remover diretor!', '', {
+                duration: 5000,
+                panelClass: ['errorSnackbar', 'error'],
+              });
+            }
           }
         );
       }
+    });
+  }
+
+  mostrarMensagemConfirmacao(mensagem: string) {
+    this.dialog.open(DlgGenericaComponent, {
+      data: { mensagemHtml: mensagem }
     });
   }
 }

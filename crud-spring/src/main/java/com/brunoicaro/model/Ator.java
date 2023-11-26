@@ -1,14 +1,13 @@
 package com.brunoicaro.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.metamodel.mapping.internal.EntityCollectionPart.Cardinality;
 
 import com.brunoicaro.DTO.AtorRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
@@ -48,8 +47,9 @@ public class Ator {
     @Column(length = 200, nullable = false)
     private String nome;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "atores", cascade = CascadeType.ALL)
-    private Set<Titulo> titulos = new HashSet<>();
+    private List<Titulo> titulos = new ArrayList<>();
 
     @NotNull
     @Pattern(regexp = "Ativo|Inativo")
@@ -57,6 +57,7 @@ public class Ator {
     private String status = "Ativo";
 
     public Ator(AtorRequestDTO data){
+        this.id = data._id();
         this.nome = data.nome();
     }
 }

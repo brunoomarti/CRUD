@@ -1,7 +1,7 @@
 package com.brunoicaro.DTO;
 
 public record ClasseRequestDTO(
-    Long id,
+    Long _id,
     String nome,
     int prazoDias,
     double valor

@@ -21,6 +21,9 @@ export class TitulosFormComponent implements OnInit{
   listaDeAtores: any[] = [];
   listaDeDiretores: any[] = [];
   listaDeClasses: any[] = [];
+  modoEdicao: boolean = false;
+  mensagemSnackbarAcerto: string = 'Titulo cadastrado com sucesso.';
+  mensagemSnackbarErro: string = 'Erro ao cadastrar titulo.';
 
   constructor(private formBuilder: FormBuilder,
               private servico: TitulosService,
@@ -60,6 +63,12 @@ export class TitulosFormComponent implements OnInit{
     this.atorService.listar().subscribe(atores => this.listaDeAtores = atores);
     this.diretorService.listar().subscribe(diretores => this.listaDeDiretores = diretores);
     this.classeService.listar().subscribe(classes => this.listaDeClasses = classes);
+
+    this.route.params.subscribe(params => {
+      this.modoEdicao = !!params['id'];
+      this.mensagemSnackbarAcerto = this.modoEdicao ? 'Titulo editado com sucesso.' : 'Titulo cadastrado com sucesso.';
+      this.mensagemSnackbarErro = this.modoEdicao ? 'Erro ao editar titulo.' : 'Erro ao cadastrar titulo.';
+    });
   }
 
   onSubmit() {
@@ -68,11 +77,11 @@ export class TitulosFormComponent implements OnInit{
   }
 
   onFailed() {
-    this.snackBar.open('Erro ao cadastrar titulo.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarErro, '', { duration: 5000, panelClass: ['errorSnackbar'] });
   }
 
   onSucess() {
-    this.snackBar.open('Titulo cadastrado com sucesso.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarAcerto, '', { duration: 5000, panelClass: ['successSnackbar'] });
     this.location.back();
   }
 

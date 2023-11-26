@@ -19,7 +19,6 @@ export class ClassesComponent implements OnInit {
 
   classes$: Observable<Classe[]>;
 
-
   constructor(
     private classesservices: ClassesService,
     public dialog: MatDialog,
@@ -62,7 +61,7 @@ export class ClassesComponent implements OnInit {
           () => {
             this.snackBar.open('Classe removida com sucesso!', '', {
               duration: 5000,
-              panelClass: ['custom-snackbar'],
+              panelClass: ['successSnackbar'],
             });
 
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -70,13 +69,23 @@ export class ClassesComponent implements OnInit {
             });
           },
           (error) => {
-            this.snackBar.open('Erro ao remover classe!', '', {
-              duration: 5000,
-              panelClass: ['custom-snackbar', 'error'],
-            });
+            if (error.status === 409) {
+              this.mostrarMensagemConfirmacao(error.error.message);
+            } else {
+              this.snackBar.open('Erro ao remover classe!', '', {
+                duration: 5000,
+                panelClass: ['errorSnackbar', 'error'],
+              });
+            }
           }
         );
       }
+    });
+  }
+
+  mostrarMensagemConfirmacao(mensagem: string) {
+    this.dialog.open(DlgGenericaComponent, {
+      data: { mensagemHtml: mensagem }
     });
   }
 }

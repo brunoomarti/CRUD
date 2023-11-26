@@ -61,22 +61,31 @@ export class TitulosComponent implements OnInit {
           () => {
             this.snackBar.open('Titulo removido com sucesso!', '', {
               duration: 5000,
-              panelClass: ['custom-snackbar'],
+              panelClass: ['successSnackbar'],
             });
 
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
               this.router.navigate(['titulo']);
             });
           },
-          () => {
-            this.snackBar.open('Erro ao remover titulo!', '', {
-              duration: 5000,
-              panelClass: ['custom-snackbar', 'error'],
-            });
+          (error) => {
+            if (error.status === 409) {
+              this.mostrarMensagemConfirmacao(error.error.message);
+            } else {
+              this.snackBar.open('Erro ao remover titulo!', '', {
+                duration: 5000,
+                panelClass: ['errorSnackbar', 'error'],
+              });
+            }
           }
         );
       }
     });
   }
 
+  mostrarMensagemConfirmacao(mensagem: string) {
+    this.dialog.open(DlgGenericaComponent, {
+      data: { mensagemHtml: mensagem }
+    });
+  }
 }

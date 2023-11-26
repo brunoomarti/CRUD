@@ -3,9 +3,16 @@
   --cinza-um: #1E1E1E;
   --cinza-dois: #3b3b3b;
   --primary: #DD2C00;
+  --verde: #00DD69;
 }
 
-.custom-snackbar {
+.successSnackbar {
+  --mdc-snackbar-container-color: var(--verde);
+  --mdc-snackbar-supporting-text-color: black;
+  --mdc-snackbar-supporting-text-weight: 500;
+}
+
+.errorSnackbar {
   --mdc-snackbar-container-color: var(--primary);
   --mdc-snackbar-supporting-text-color: white;
 }
@@ -19,6 +26,10 @@ html {
   --mdc-outlined-text-field-focus-outline-color: white;
   --mdc-outlined-text-field-focus-label-text-color: white;
   --mat-select-focused-arrow-color: white;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+  color: white;
 }
 
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-full, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-full {

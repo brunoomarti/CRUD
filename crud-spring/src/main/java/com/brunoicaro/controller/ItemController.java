@@ -48,7 +48,7 @@ public class ItemController {
     @ResponseStatus(code = HttpStatus.CREATED)
     @Transactional
     public Item saveItem(@RequestBody @Valid ItemRequestDTO data){
-        return itemService.saveItem(data.id(), data.titulo(), data.dataAquisicao(), data.tipo());
+        return itemService.saveItem(data._id(), data.titulo(), data.dataAquisicao(), data.tipo());
     }
 
     @GetMapping("/{id}")

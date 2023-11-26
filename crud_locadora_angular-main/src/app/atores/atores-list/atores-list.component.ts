@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Ator} from "../modelo/ator";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-atores-list',

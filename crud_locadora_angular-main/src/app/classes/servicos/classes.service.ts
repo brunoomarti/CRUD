@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Classe} from "../modelo/classe";
 import {HttpClient} from "@angular/common/http";
-import {delay, first, tap} from "rxjs";
+import {first, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'

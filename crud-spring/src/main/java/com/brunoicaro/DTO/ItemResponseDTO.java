@@ -6,7 +6,7 @@ import com.brunoicaro.model.Item;
 import com.brunoicaro.model.Titulo;
 
 public record ItemResponseDTO(
-    Long id,
+    Long _id,
     Titulo titulo,
     Date dataAquisicao,
     String tipo

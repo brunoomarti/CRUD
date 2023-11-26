@@ -14,6 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AtorFormComponent implements OnInit {
   form: FormGroup;
+  modoEdicao: boolean = false;
+  mensagemSnackbarAcerto: string = 'Ator cadastrado com sucesso.';
+  mensagemSnackbarErro: string = 'Erro ao cadastrar ator.';
 
   constructor(private formBuilder: FormBuilder,
               private servico: AtoresService,
@@ -33,6 +36,12 @@ export class AtorFormComponent implements OnInit {
   ngOnInit() {
     const ator: Ator = this.route.snapshot.data['ator'];
     this.form.setValue({_id: ator._id,  nome: ator.nome});
+
+    this.route.params.subscribe(params => {
+      this.modoEdicao = !!params['id'];
+      this.mensagemSnackbarAcerto = this.modoEdicao ? 'Ator editado com sucesso.' : 'Ator cadastrado com sucesso.';
+      this.mensagemSnackbarErro = this.modoEdicao ? 'Erro ao editar ator.' : 'Erro ao cadastrar ator.';
+    });
   }
 
   onSubmit() {
@@ -40,11 +49,11 @@ export class AtorFormComponent implements OnInit {
   }
 
   onFailed() {
-    this.snackBar.open('Erro ao cadastrar ator.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarErro, '', { duration: 5000, panelClass: ['errorSnackbar'] });
   }
 
   onSucess() {
-    this.snackBar.open('Ator cadastrado com sucesso.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarAcerto, '', { duration: 5000, panelClass: ['successSnackbar'] });
     this.location.back();
   }
 

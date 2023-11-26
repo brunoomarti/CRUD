@@ -1,6 +1,34 @@
 @use '@angular/material' as mat;
 @import '@angular/material/theming';
 
+.confirmBox{
+  padding: 20px;
+  width: 300px;
+  height: fit-content;
+}
+
+.mdc-dialog__actions {
+  display: flex;
+  position: relative;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  min-height: 0;
+  margin: 0;
+  padding: 8px;
+  border-top: 1px solid rgba(0,0,0,0);
+}
+
+.mdc-dialog__title::before {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  content: "";
+  vertical-align: 0;
+}
+
 .button-area {
   width: 100%;
   margin: 10px 0 0 0;
@@ -21,6 +49,7 @@
   font-weight: 500;
   transition: 300ms ease;
   margin-right: 10px;
+  height: auto;
 }
 
 .button-2 {
@@ -31,6 +60,8 @@
   text-decoration: none;
   font-weight: 500;
   transition: 300ms ease;
+  height: auto;
+  background-color: transparent;
 }
 
 .button:hover {

@@ -1,6 +1,17 @@
 @use '@angular/material' as mat;
 @import '@angular/material/theming';
 
+.arrow-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 8px; /* Ajuste conforme necessário */
+  transition: transform 0.3s ease; /* Adiciona uma transição suave */
+}
+
+.arrow-icon.expanded {
+  transform: rotate(180deg);
+}
+
 mat-accordion {
   margin: 0 0 20px 0;
 }

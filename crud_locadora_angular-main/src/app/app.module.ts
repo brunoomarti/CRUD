@@ -11,6 +11,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { DatePipe } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { DatePipe } from '@angular/common';
         MatButtonModule,
         MatSnackBarModule,
         MatExpansionModule,
-        MatSelectModule
+        MatSelectModule,
+        MatMenuModule
     ],
     providers: [
         DatePipe

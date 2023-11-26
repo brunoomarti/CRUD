@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Location} from "@angular/common";
 import {ClassesService} from "../servicos/classes.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DlgGenericaComponent} from "../../compartilhado/componentes/dlg-generica/dlg-generica.component";
 import {ActivatedRoute} from "@angular/router";
 import {Classe} from "../modelo/classe";
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,6 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ClasseFormComponent implements OnInit {
   form: FormGroup;
+  modoEdicao: boolean = false;
+  mensagemSnackbarAcerto: string = 'Classe cadastrada com sucesso.';
+  mensagemSnackbarErro: string = 'Erro ao cadastrar classe.';
 
   constructor(private formBuilder: FormBuilder,
               private servico: ClassesService,
@@ -37,6 +39,12 @@ export class ClasseFormComponent implements OnInit {
   ngOnInit() {
     const classe: Classe = this.route.snapshot.data['classe'];
     this.form.setValue({_id: classe._id,  nome: classe.nome, prazoDias: classe.prazoDias, valor: classe.valor });
+
+    this.route.params.subscribe(params => {
+      this.modoEdicao = !!params['id'];
+      this.mensagemSnackbarAcerto = this.modoEdicao ? 'Titulo editado com sucesso.' : 'Classe cadastrado com sucesso.';
+      this.mensagemSnackbarErro = this.modoEdicao ? 'Erro ao editar titulo.' : 'Erro ao cadastrar classe.';
+    });
   }
 
   onSubmit() {
@@ -44,11 +52,11 @@ export class ClasseFormComponent implements OnInit {
   }
 
   onFailed() {
-    this.snackBar.open('Erro ao cadastrar classe.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarErro, '', { duration: 5000, panelClass: ['errorSnackbar'] });
   }
 
   onSucess() {
-    this.snackBar.open('Classe cadastrada com sucesso.', '', { duration: 5000, panelClass: ['custom-snackbar'] });
+    this.snackBar.open(this.mensagemSnackbarAcerto, '', { duration: 5000, panelClass: ['successSnackbar'] });
     this.location.back();
   }
 

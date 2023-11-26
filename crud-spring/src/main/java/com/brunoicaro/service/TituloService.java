@@ -1,6 +1,7 @@
 package com.brunoicaro.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.brunoicaro.DTO.TituloRequestDTO;
 import com.brunoicaro.DTO.TituloResponseDTO;
+import com.brunoicaro.exception.ExclusaoComDependenciasException;
 import com.brunoicaro.exception.RecordNotFoundException;
+import com.brunoicaro.model.Item;
 import com.brunoicaro.model.Titulo;
 import com.brunoicaro.repository.TituloRepository;
 
@@ -53,10 +56,29 @@ public class TituloService {
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public void delete(@PathVariable @NotNull @Positive Long id){
-        repository.delete(repository.findById(id)
-                .orElseThrow(() -> new RecordNotFoundException(id)));
-
+        public void delete(@PathVariable @NotNull @Positive Long id) {
+        List<String> itensDependentes = obterItensComDependencias(id);
+        
+        if (!itensDependentes.isEmpty()) {
+            throw new ExclusaoComDependenciasException(
+                "Este registro possui dependências em outras entidades.<br/><br/>" +
+                "Itens dependentes: <br/>" +
+                String.join("<br/>", itensDependentes)
+            );
+        } else {
+            repository.delete(repository.findById(id)
+                    .orElseThrow(() -> new RecordNotFoundException(id)));
+        }
     }
 
+    private List<String> obterItensComDependencias(Long id) {
+        Titulo titulo = repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id));
+
+        List<String> itensComDependencias = titulo.getItens().stream()
+                .map(item -> "Id: " + item.getId() + ", Data de Aquisição: " + item.getDataAquisicao())
+                .collect(Collectors.toList());
+
+        return itensComDependencias;
+    }
 }

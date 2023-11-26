@@ -1,4 +1,9 @@
-<div mat-dialog-content style="color: white; height: 200px; width: 400px;"> {{ data }}</div>
-<div mat-dialog-actions  align="center">
-    <button mat-stroked-button mat-dialog-close color="white" (click)="voltar()">Fechar</button>
+<div class="confirmBox">
+  <h1 mat-dialog-title style="padding: 0; margin: 0; height: auto; width: auto;">Atenção!</h1>
+  <div mat-dialog-content [innerHTML]="data.mensagemHtml" style="padding: 0;"></div>
+  <br>
+  <div mat-dialog-actions align="center" style="padding: 0; margin: 0; display: flex; justify-content: flex-end; width: 100%;">
+    <button mat-raised-button mat-dialog-close color="primary" style="flex: 1;">OK</button>
+  </div>
 </div>
+

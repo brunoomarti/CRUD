@@ -1,9 +1,7 @@
 package com.brunoicaro.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -11,7 +9,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import com.brunoicaro.DTO.TituloRequestDTO;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -63,7 +60,7 @@ public class Titulo {
     @Column(length = 500, nullable = false)
     private String sinopse;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "titulo_ator",
             joinColumns = @JoinColumn(name = "titulo_id"),
             inverseJoinColumns = @JoinColumn(name = "ator_id"))
@@ -80,10 +77,10 @@ public class Titulo {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Classe classe;
 
-    @OneToMany(mappedBy = "titulo", orphanRemoval = true)
+    @OneToMany(mappedBy = "titulo")
     @Cascade({CascadeType.ALL})
     @JsonIgnoreProperties("titulo")
-    private Set<Item> itens = new HashSet<>();
+    private List<Item> itens = new ArrayList<>();
 
     @NotNull
     @Pattern(regexp = "Ativo|Inativo")
@@ -91,6 +88,7 @@ public class Titulo {
     private String status = "Ativo";
 
     public Titulo(TituloRequestDTO data){
+        this.id = data._id();
         this.nome = data.nome();
         this.atores = data.atores();
         this.diretor = data.diretor();

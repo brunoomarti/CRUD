@@ -46,7 +46,7 @@ public class AtorController {
 
     @PutMapping("/{id}")
     public Ator update(@PathVariable @NotNull @Positive Long id, @RequestBody Ator ator){
-        return atorService.update(id ,ator);
+        return atorService.update(id, ator);
     }
 
     @DeleteMapping("/{id}")

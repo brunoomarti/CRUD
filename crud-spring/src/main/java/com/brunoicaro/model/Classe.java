@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.brunoicaro.DTO.ClasseRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
@@ -30,7 +32,7 @@ import lombok.Setter;
 @Data
 @Table(name = "classe")
 @Entity(name = "classe")
-@SQLDelete(sql = "UPDATE Ator SET status = 'Inativo' WHERE id = ? ")
+@SQLDelete(sql = "UPDATE Classe SET status = 'Inativo' WHERE id = ? ")
 @Where(clause = "status = 'Ativo'")
 @Getter
 @Setter
@@ -58,6 +60,14 @@ public class Classe {
     @Column(length = 10, nullable = false)
     private String status = "Ativo";
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classe", orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classe")
     private List<Titulo> titulos = new ArrayList<>();
+
+    public Classe(ClasseRequestDTO data){
+        this.id = data._id();
+        this.nome = data.nome();
+        this.prazoDias = data.prazoDias();
+        this.valor = data.valor();
+    }
 }

@@ -64,7 +64,7 @@ public class Item {
     private String status = "Ativo";
 
     public Item(ItemRequestDTO data){
-        this.id = data.id();
+        this.id = data._id();
         this.titulo = data.titulo();
         this.dataAquisicao = data.dataAquisicao();
         this.tipo = data.tipo();
