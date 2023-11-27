@@ -1,8 +1,8 @@
 :root {
-  --background-color: rgb(10, 10, 10);
+  --background-color: rgba(10, 10, 10);
   --cinza-um: #1E1E1E;
   --cinza-dois: #3b3b3b;
-  --primary: #DD2C00;
+  --primary: #3949AB;
   --verde: #00DD69;
 }
 

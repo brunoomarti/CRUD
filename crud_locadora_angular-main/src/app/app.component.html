@@ -1,4 +1,4 @@
-<mat-expansion-panel hideToggle (opened)="togglePanel()" (closed)="togglePanel()">
+<mat-expansion-panel #myPanel hideToggle (opened)="togglePanel()" (closed)="togglePanel()" style="z-index: 2;" [expanded]="isPanelExpanded">
   <mat-expansion-panel-header>
     <mat-panel-title>
       <div class="arrow-icon" [class.expanded]="isPanelExpanded">
@@ -13,11 +13,11 @@
   <div class="button-area">
     <div class="button-group">
       <mat-menu #categoriasMenu="matMenu">
-        <button mat-menu-item routerLink="/ator">ATOR</button>
-        <button mat-menu-item routerLink="/classe">CLASSE</button>
-        <button mat-menu-item routerLink="/diretor">DIRETOR</button>
-        <button mat-menu-item routerLink="/titulo">TITULO</button>
-        <button mat-menu-item routerLink="/item">ITEM</button>
+        <button mat-menu-item routerLink="/ator" (click)="togglePanel">ATOR</button>
+        <button mat-menu-item routerLink="/classe" (click)="togglePanel">CLASSE</button>
+        <button mat-menu-item routerLink="/diretor" (click)="togglePanel">DIRETOR</button>
+        <button mat-menu-item routerLink="/titulo" (click)="togglePanel">TITULO</button>
+        <button mat-menu-item routerLink="/item" (click)="togglePanel">ITEM</button>
       </mat-menu>
 
       <button mat-button [matMenuTriggerFor]="categoriasMenu" class="button" color="white">

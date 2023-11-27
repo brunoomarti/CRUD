@@ -1,57 +1,49 @@
 package com.brunoicaro.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.*;
 
 import com.brunoicaro.DTO.ClienteRequestDTO;
-import com.brunoicaro.DTO.SocioRequestDTO;
 
+import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 @Data
-@Table(name = "socio")
 @Entity(name = "socio")
 @SQLDelete(sql = "UPDATE Socio SET status = 'Inativo' WHERE id = ? ")
 @Where(clause = "status = 'Ativo'")
+@Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorValue("Socio")
 @EqualsAndHashCode(of = "id")
-public class Socio extends Cliente {
+public class Socio extends Cliente implements Serializable {
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5)
     private int numero;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String rua;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String bairro;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String cidade;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 150)
     private String estado;
 
     @Column(nullable = false)
     private String telefone;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length =14 , updatable = false)
     private String cpf;
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -62,15 +54,48 @@ public class Socio extends Cliente {
     @Column(length = 10, nullable = false)
     private String status = "Ativo";
 
-    public Socio(SocioRequestDTO data) {
-        this.numero = data.numero();
-        this.rua = data.rua();
-        this.bairro = data.bairro();
-        this.cidade = data.cidade();
-        this.estado = data.estado();
-        this.telefone = data.telefone();
-        this.cpf = data.cpf();
-        this.dependentes = data.dependentes();
+    public Socio(ClienteRequestDTO requestCliente) {
+        super(requestCliente);
+        this.cpf = requestCliente.cpf();
+        this.telefone = requestCliente.telefone();
+        this.numero = requestCliente.numero();
+        this.rua = requestCliente.rua();
+        this.bairro = requestCliente.bairro();
+        this.cidade = requestCliente.cidade();
+        this.estado = requestCliente.estado();
+        this.dependentes = requestCliente.dependentes();
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setNumero(int numero) {    
+        this.numero = numero;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setDependentes(List<Dependente> dependentes) {
+        this.dependentes = dependentes;
     }
 
 }
