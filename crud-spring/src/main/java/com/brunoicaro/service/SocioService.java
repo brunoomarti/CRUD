@@ -32,12 +32,12 @@ public class SocioService {
         return repository.findById(id).map((SocioResponseDTO::new)).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    @Transactional
-    public Socio save(@Valid SocioRequestDTO data){
-        Socio socioData = new Socio(data);
-        System.out.println(socioData);
-        return repository.save(socioData);
-    }
+    // @Transactional
+    // public Socio save(@Valid SocioRequestDTO data){
+    //     Socio socioData = new Socio(data);
+    //     System.out.println(socioData);
+    //     return repository.save(socioData);
+    // }
 
     public Socio update(@NotNull @Positive Long id, @Valid Socio socio){
         return repository.findById(id)

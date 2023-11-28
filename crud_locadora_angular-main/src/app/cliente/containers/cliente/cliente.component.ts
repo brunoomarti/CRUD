@@ -26,7 +26,7 @@ export class ClienteComponent implements OnInit {
     private route: ActivatedRoute,
     private  snackBar: MatSnackBar
   ) {
-    this.cliente$ = this.clienteservice.listar()
+    this.cliente$ = this.clienteservice.list()
       .pipe(
         catchError(err => {
           this.dlgGenerica('Erro ao carregar classes.');
@@ -57,7 +57,7 @@ export class ClienteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.clienteservice.remove(cliente._id).subscribe(
+        this.clienteservice.remove(cliente._id.toString()).subscribe(
           () => {
             this.snackBar.open('Cliente removido com sucesso!', '', {
               duration: 5000,

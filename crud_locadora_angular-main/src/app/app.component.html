@@ -13,28 +13,28 @@
   <div class="button-area">
     <div class="button-group">
       <mat-menu #categoriasMenu="matMenu">
-        <button mat-menu-item routerLink="/ator" (click)="togglePanel">ATOR</button>
-        <button mat-menu-item routerLink="/classe" (click)="togglePanel">CLASSE</button>
-        <button mat-menu-item routerLink="/diretor" (click)="togglePanel">DIRETOR</button>
-        <button mat-menu-item routerLink="/titulo" (click)="togglePanel">TITULO</button>
-        <button mat-menu-item routerLink="/item" (click)="togglePanel">ITEM</button>
+        <button mat-menu-item routerLink="/ator" (click)="togglePanel(true)">ATOR</button>
+        <button mat-menu-item routerLink="/classe" (click)="togglePanel(true)">CLASSE</button>
+        <button mat-menu-item routerLink="/diretor" (click)="togglePanel(true)">DIRETOR</button>
+        <button mat-menu-item routerLink="/titulo" (click)="togglePanel(true)">TITULO</button>
+        <button mat-menu-item routerLink="/item" (click)="togglePanel(true)">ITEM</button>
       </mat-menu>
 
       <button mat-button [matMenuTriggerFor]="categoriasMenu" class="button" color="white">
-        CATEGORIAS
+        CONTROLE DE ACERVO
       </button>
 
       <mat-menu #controleMenu="matMenu">
-        <button mat-menu-item routerLink="/">LOCAÇÃO E DEVOLUÇÃO</button>
-        <button mat-menu-item routerLink="/cliente">CLIENTE</button>
-        <button mat-menu-item routerLink="/">FUNCIONÁRIO</button>
+        <button mat-menu-item routerLink="/" (click)="togglePanel(true)">LOCAÇÃO E DEVOLUÇÃO</button>
+        <button mat-menu-item routerLink="/cliente" (click)="togglePanel(true)">CLIENTE</button>
+        <button mat-menu-item routerLink="/" (click)="togglePanel(true)">FUNCIONÁRIO</button>
       </mat-menu>
 
       <button mat-button [matMenuTriggerFor]="controleMenu" class="button" color="white">
-        CONTROLE
+        CONTROLE DE LOCAÇÃO
       </button>
 
-      <button routerLink="/menu" class="button-2">VOLTAR</button>
+      <button routerLink="/menu" class="button-2" (click)="togglePanel(true)">VOLTAR</button>
     </div>
   </div>
 </mat-expansion-panel>

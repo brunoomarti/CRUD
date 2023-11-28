@@ -1,50 +1,65 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from '../modelo/Cliente';
-import {HttpClient} from "@angular/common/http";
-import {first, tap} from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { first } from "rxjs";
+import { Socio } from '../modelo/Socio';
+import { Dependente } from '../modelo/Dependente';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
 
-  private readonly API = 'api/socio';
+  private readonly API = 'api/cliente';
 
-  constructor(private httpClient: HttpClient) {
+  constructor( private htttpCliente: HttpClient) { }
 
-  }
-
-  listar() {
-    return this.httpClient.get<Cliente[]>(this.API)
+  list() {
+    return this.htttpCliente.get<Cliente[]>(this.API)
       .pipe(
-        first(),
-        tap(clientes => console.log()))
-
+        first()
+      );
   }
 
-  save(record: Cliente) {
-    console.log(record);
-    if (record._id != 0) {
+  listSocios() {
+    const url = `${this.API}/socio`;
+    return this.htttpCliente.get<Socio[]>(url)
+      .pipe(
+        first()
+      );
+  }
 
+  listDependentes() {
+    const url = `${this.API}/dependente`;
+    return this.htttpCliente.get<Dependente[]>(url)
+      .pipe(
+        first()
+      );
+  }
+
+  loadById(id: string) {
+    return this.htttpCliente.get<Cliente>(`${this.API}/${id}`);
+  }
+
+
+  save(record: Partial<Cliente>) {
+    if (record._id) {
       return this.update(record);
     }
     return this.create(record);
   }
 
-  loadbyId(id: number) {
-    return this.httpClient.get<Cliente>(`${this.API}/${id}`);
+
+  private create(record: Partial<Cliente>) {
+    return this.htttpCliente.post<Cliente>(this.API, record).pipe(first());
   }
 
-  private create(record: Cliente) {
-    return this.httpClient.post<Cliente>(this.API, record);
+  private update(record: Partial<Cliente>) {
+    return this.htttpCliente.put<Cliente>(`${this.API}/${record._id}`, record).pipe(first());
   }
 
-  private update(record: Cliente) {
-    return this.httpClient.put<Cliente>(`${this.API}/${record._id}`, record);
-  }
-
-  remove(id: number) {
-    return this.httpClient.delete(`${this.API}/${id}`);
+  remove(id: string) {
+    return this.htttpCliente.delete(`${this.API}/${id}`).pipe(first());
   }
 
 }

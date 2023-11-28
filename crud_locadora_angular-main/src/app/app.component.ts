@@ -7,8 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isPanelExpanded = false;
+  isPanelToggledFromMenu = false;
 
-  togglePanel() {
+  togglePanel(isMenuEvent: boolean = false) {
+    if (isMenuEvent) {
+      this.isPanelToggledFromMenu = true;
+    }
+
+    if (!isMenuEvent && this.isPanelToggledFromMenu) {
+      this.isPanelToggledFromMenu = false;
+      return;
+    }
+
     this.isPanelExpanded = !this.isPanelExpanded;
   }
 

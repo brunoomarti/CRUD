@@ -14,8 +14,8 @@ export class ClienteResolver implements Resolve<Cliente> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Cliente> {
 
     if (route.params && route.params['id']) {
-      return this.service.loadbyId(route.params['id']);
+      return this.service.loadById(route.params['id']);
     }
-    return of({ _id: 0, nome: '', telefone: '', sexo: '', cpf: '', dataNasc: new Date(), rua: '', numero: 0, bairro: '', cidade: '', estado: ''});
+    return of({ _id: 0, numInscricao: '', nome: '', telefone: '', sexo: '', cpf: '', dataNascimento: new Date(), rua: '', numero: 0, bairro: '', cidade: '', estado: '', status: false, tipoCliente: ''});
   }
 }

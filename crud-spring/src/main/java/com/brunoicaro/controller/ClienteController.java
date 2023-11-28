@@ -23,6 +23,7 @@ import com.brunoicaro.repository.ClienteRepository;
 import com.brunoicaro.repository.DependenteRepository;
 import com.brunoicaro.repository.SocioRepository;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -107,35 +108,39 @@ public class ClienteController {
     }
 
     @NotNull
-    private static Socio getSocio(RequestCliente data, Optional<Socio> optionalSocio) {
+    private static Socio getSocio(ClienteRequestDTO data, Optional<Socio> optionalSocio) {
         Socio socio = optionalSocio.get();
 
         socio.setNome(data.nome());
         socio.setNumInscricao(data.numInscricao());
-        socio.setDtNascimento(data.getDataNascimento());
+        socio.setDataNascimento(data.getDataNascimento());
         socio.setSexo(data.sexo());
-        socio.setAtivo(data.isAtivo());
-        socio.setLocacoes(data.locacoes());
+        socio.setStatus(data.status());
+        //socio.setLocacoes(data.locacoes());
         socio.setTipo(data.tipoCliente());
 
         socio.setCpf(data.cpf());
         socio.setTelefone(data.telefone());
-        socio.setEndereco(data.endereco());
+        socio.setNumero(data.numero());
+        socio.setRua(data.rua());
+        socio.setBairro(data.bairro());
+        socio.setCidade(data.cidade());
+        socio.setEstado(data.estado());
         socio.setDependentes(data.dependentes());
         return socio;
     }
 
     @NotNull
-    private static Dependente getDependente(RequestCliente data, Optional<Dependente> optionalDependente) {
+    private static Dependente getDependente(ClienteRequestDTO data, Optional<Dependente> optionalDependente) {
         Dependente dependente = optionalDependente.get();
 
 
         dependente.setNome(data.nome());
         dependente.setNumInscricao(data.numInscricao());
-        dependente.setDtNascimento(data.getDataNascimento());
+        dependente.setDataNascimento(data.getDataNascimento());
         dependente.setSexo(data.sexo());
-        dependente.setAtivo(data.isAtivo());
-        dependente.setLocacoes(data.locacoes());
+        dependente.setStatus(data.status());
+        //dependente.setLocacoes(data.locacoes());
         dependente.setTipo(data.tipoCliente());
 
         dependente.setSocio(data.socio());
